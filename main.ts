@@ -32,41 +32,39 @@ basic.forever(function () {
     g[0][0] = Math.round(rotver / 90)
     g[0][1] = Math.round(rothor / 90)
 
-    if (g[0][0] == 0 && g[0][1] == 0){
-        return
-    }
 
-    if (g[0][0] == 0) {
+    
+    if (g[0][0] == 0 && g[0][1] !== 0) {
         g[1][0] = 1
         g[1][1] = g[0][1]
         g[2][0] = -1
         g[2][1] = g[0][1]
     }
-    if (g[0][1] == 0) {
+    else if (g[0][1] == 0 && g[0][0]!==0) {
         g[1][0] = g[0][0]
         g[1][1] = 1
         g[2][0] = g[0][0]
         g[2][1] = -1
     }
-    if (g[0][0] == 1 && g[0][1] == 1) {
+    else if (g[0][0] == 1 && g[0][1] == 1) {
         g[1][0] = 1
         g[1][1] = 0
         g[2][0] = 0
         g[2][1] = 1
     }
-    if (g[0][0] == 1 && g[0][1] == -1) {
+    else if (g[0][0] == 1 && g[0][1] == -1) {
         g[1][0] = 1
         g[1][1] = 0
         g[2][0] = 0
         g[2][1] = -1
     }
-    if (g[0][0] == -1 && g[0][1] == 1) {
+    else if (g[0][0] == -1 && g[0][1] == 1) {
         g[1][0] = -1
         g[1][1] = 0
         g[2][0] = 0
         g[2][1] = 1
     }
-    if (g[0][0] == -1 && g[0][1] == -1) {
+    else if (g[0][0] == -1 && g[0][1] == -1) {
         g[1][0] = -1
         g[1][1] = 0
         g[2][0] = 0
@@ -79,6 +77,18 @@ basic.forever(function () {
             if (lights[y2][x2] == 0) {
                 continue;
             }
+
+            if (g[0][0] == 0 && g[0][1] == 0 && randint(0,20) == 0) {
+                g[1][0] = randint(-1, 1);
+                g[1][1] = randint(-1, 1);
+                g[2][0] = randint(-1, 1);
+                g[2][1] = randint(-1, 1);
+            } else {
+                g[1][0] = randint(0, 0);
+                g[1][1] = randint(0, 0);
+                g[2][0] = randint(0, 0);
+                g[2][1] = randint(0, 0);}
+
             for (let i = 0; i <= g.length - 1; i++) {
                 outOfBounds = x2 + g[i][1] > 4 || x2 + g[i][1] < 0 || y2 + g[i][0] > 4 || y2 + g[i][0] < 0
                 if (!(outOfBounds)) {
@@ -93,6 +103,5 @@ basic.forever(function () {
             }
         }
     }
-    console.log(_lights[2]);
-lights = _lights
+    lights = _lights
 })
